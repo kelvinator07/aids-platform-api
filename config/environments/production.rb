@@ -85,7 +85,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  Rails.application.routes.default_url_options = { host: "https://aid-platform-api.herokuapp.com" }
+  Rails.application.routes.default_url_options = { host: "https://aid-platform-rails.herokuapp.com" }
 
   # config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
 
