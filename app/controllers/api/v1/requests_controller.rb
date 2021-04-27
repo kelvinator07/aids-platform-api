@@ -2,7 +2,7 @@ class Api::V1::RequestsController < Api::V1::BaseController
 
     # GET /requests
     def index
-      # less than 5 volunteers/responses.. 24 hours, 
+      # less than 5 volunteers/responses.. 24 hours,
       @requests = Request.unfulfilled_and_less_than_five
       # binding.pry
       # @requests.each { |n| puts "Current size is: #{n.responses.inspect}" }
@@ -20,7 +20,7 @@ class Api::V1::RequestsController < Api::V1::BaseController
       @user = current_user
       if @user
         @request = @user.requests.create!(request_params)
-        
+
         if @request.valid?
           render json: responsenew(@request), status: 201
         else
@@ -78,7 +78,9 @@ class Api::V1::RequestsController < Api::V1::BaseController
 
     def republish
       request = Request.where(id: params[:request_id])
+
       if request
+        request.update(fulfilled: false)
         @responses = Response.where(request_id: params[:request_id])
         if @responses
           @responses.destroy_all
