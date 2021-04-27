@@ -52,7 +52,7 @@ class Api::V1::RequestsController < Api::V1::BaseController
       end
     end
 
-    def republish
+    def republishold
       @request = Request.includes(:responses).where(id: params['request_id'])
       # get response and check last response 24 hours
       # puts @request, :include => {:responses => {:only => [:first_name, :last_name]}
@@ -76,18 +76,20 @@ class Api::V1::RequestsController < Api::V1::BaseController
       end
     end
 
-    # if @request && @request.user_id == @current_user.id
-    #   @volunteers = Volunteer.where(request_id: params[:request_id])
-
-    #   if @volunteers
-    #     @volunteers.destroy_all
-    #     return render status: 200
-    #   else
-    #     return render status: 400
-    #   end
-    # else
-    #   return render status: 403
-    # end
+    def republish
+      request = Request.where(id: params[:request_id])
+      if request
+        @responses = Response.where(request_id: params[:request_id])
+        if @responses
+          @responses.destroy_all
+          return render json: { }, status: 200
+        else
+          return render json: { }, status: 400
+        end
+      else
+        return render status: 403
+      end
+    end
 
     # DELETE /requests/:id
     def destroy
