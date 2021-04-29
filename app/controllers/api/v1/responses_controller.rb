@@ -3,7 +3,7 @@ class Api::V1::ResponsesController < Api::V1::BaseController
 
   # GET /responses
   def index
-    render json: { responses: current_user.responses.collect{ |r| r.as_json(:include => [:messages, :request] )}, 
+    render json: { responses: current_user.responses.collect{ |r| r.as_json(:include => [:messages, :request] )},
         requests: current_user.requests.collect{ |r| r.as_json(:include => :messages )}
        }, status: 200
   end
@@ -13,7 +13,7 @@ class Api::V1::ResponsesController < Api::V1::BaseController
     @request = Request.find(params['request_id'])
     if @request
       @response = @request.responses.create!(user_id: current_user.id)
-      
+
       if @response.valid?
         render json: responsenew(@response), status: 201
       else
@@ -27,12 +27,11 @@ class Api::V1::ResponsesController < Api::V1::BaseController
     end
 
   end
- 
+
 
   private
 
   def response_params
-    # whitelist params
     params.fetch(:response).permit(:request_id)
   end
 

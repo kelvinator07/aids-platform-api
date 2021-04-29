@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::API
-    # protect_from_forgery with: :null_session
-    # skip_before_action :verify_authenticity_token
     require 'pry'
 
     rescue_from ActiveRecord::RecordNotUnique, with: :record_not_unique
@@ -37,12 +35,11 @@ class ApplicationController < ActionController::API
         status: "00",
         message: "Success",
         data: {
-          # total: value.size, 
           users: value.as_json(except: [:password_digest, :updated_at])
         }
       }
     end
-  
+
     def successnew(value, token)
       response = {
         status: "00",
@@ -53,7 +50,7 @@ class ApplicationController < ActionController::API
         }
       }
     end
-  
+
     def failure(value)
       response = {
         status: "99",
@@ -61,5 +58,5 @@ class ApplicationController < ActionController::API
         data: "null"
       }
     end
-    
+
 end
