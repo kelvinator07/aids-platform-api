@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   #   end
   # end
 
+  mount ActionCable.server => '/cable'
+
   namespace :api, defaults: { format: :json } do
     namespace :v1, defaults: { format: :json } do
       resources :users, only: %w[show]
@@ -33,9 +35,6 @@ Rails.application.routes.draw do
       resources :requests
       resources :responses
       resources :messages
-      
-
-      mount ActionCable.server => '/cable'
 
     end
   end

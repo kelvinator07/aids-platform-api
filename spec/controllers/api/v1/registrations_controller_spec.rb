@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe RegistrationsController, type: :request do
 
+  let(:picture) { fixture_file_upload('kelvin.png') }
   let (:user) { build_user }
   let (:existing_user) { create_user }
   let (:signup_url) { '/api/v1/signup' }
@@ -9,13 +10,11 @@ describe RegistrationsController, type: :request do
   context 'When creating a new user' do
     before do
       post signup_url, params: {
-        # registration: {
             firstname: user.firstname,
             lastname: user.lastname,
             email: user.email,
             password: user.password,
-            picture: user.picture
-        # }
+            picture: picture
       }
     end
 
@@ -23,7 +22,7 @@ describe RegistrationsController, type: :request do
       expect(response.status).to eq(200)
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
-      # expect(json).to eq(10)
+
     end
 
     it 'returns a token' do
@@ -38,13 +37,11 @@ describe RegistrationsController, type: :request do
   context 'When an email already exists' do
     before do
       post signup_url, params: {
-        # registration: {
             firstname: existing_user.firstname,
 			      lastname: existing_user.lastname,
             email: existing_user.email,
             password: existing_user.password,
-            picture: existing_user.picture
-        # }
+            picture: picture
       }
     end
 
