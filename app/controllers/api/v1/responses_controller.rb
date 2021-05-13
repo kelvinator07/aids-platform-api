@@ -3,8 +3,8 @@ class Api::V1::ResponsesController < Api::V1::BaseController
 
   # GET /responses
   def index
-    render json: { responses: current_user.responses.collect{ |r| r.as_json(:include => [:messages, :request] )},
-        requests: current_user.requests.collect{ |r| r.as_json(:include => :messages )}
+    render json: { responses: current_user.responses.order(created_at: :desc).collect{ |r| r.as_json(:include => [:messages, :request] )},
+        requests: current_user.requests.order(created_at: :desc).collect{ |r| r.as_json(:include => :messages )}
        }, status: 200
   end
 

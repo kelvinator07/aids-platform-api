@@ -4,7 +4,7 @@ class Response < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   def channel_name
-    "response-#{id}"
+    "response_#{id}"
   end
 
 end

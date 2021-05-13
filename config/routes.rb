@@ -1,28 +1,4 @@
 Rails.application.routes.draw do
-  # namespace :api do
-  #   namespace :v1 do
-  #     get 'messages/index'
-  #     get 'messages/show'
-  #     get 'messages/new'
-  #     get 'messages/create'
-  #   end
-  # end
-  # namespace :api do
-  #   namespace :v1 do
-  #     get 'responses/index'
-  #     get 'responses/show'
-  #     get 'responses/new'
-  #     get 'responses/create'
-  #   end
-  # end
-  # namespace :api do
-  #   namespace :v1 do
-  #     get 'users/index'
-  #     get 'users/show'
-  #     get 'users/new'
-  #     get 'users/create'
-  #   end
-  # end
 
   mount ActionCable.server => '/cable'
 

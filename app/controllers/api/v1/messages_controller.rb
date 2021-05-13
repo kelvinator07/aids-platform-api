@@ -21,8 +21,7 @@ class Api::V1::MessagesController < Api::V1::BaseController
 
       if @message.save
         # how to broadcast here
-
-        MessagesChannel.broadcast_to('message_channel', @response.messages)
+        MessagesChannel.broadcast_to(@response.channel_name, @message.as_json(:methods => [:firstname] ))
 
         render json: { message:  @message.as_json(:methods => [:firstname] )}, status: 200
       else

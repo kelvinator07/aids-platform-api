@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe RegistrationsController, type: :request do
 
-  let(:picture) { fixture_file_upload('kelvin.png') }
+  let (:picture) { fixture_file_upload('kelvin.png') }
   let (:user) { build_user }
   let (:existing_user) { create_user }
   let (:signup_url) { '/api/v1/signup' }
@@ -22,7 +22,6 @@ describe RegistrationsController, type: :request do
       expect(response.status).to eq(200)
       expect(response).to have_http_status(200)
       expect(json).not_to be_empty
-
     end
 
     it 'returns a token' do
